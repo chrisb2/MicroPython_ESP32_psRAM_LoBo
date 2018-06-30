@@ -1,4 +1,5 @@
 import usocket
+import socket
 
 ITER_CHUNK_SIZE = 128
 
@@ -6,6 +7,8 @@ class Response:
 
     def __init__(self, f):
         self.raw = f
+        if type(self.raw) is socket:
+            self.raw.settimeout(20)
         self.encoding = "utf-8"
         self._content_consumed = False
         self._cached = None
